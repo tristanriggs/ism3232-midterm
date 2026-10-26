@@ -1,11 +1,12 @@
 from business_rules import (
     calculate_license_total,
-    needs_contract_review,
-    gets_trainer,
-    total_licensed,
-    largest_license,
     format_license_line,
+    gets_trainer,
+    largest_license,
+    needs_contract_review,
+    total_licensed,
 )
+
 orders = [
     {"company": "Pine Books", "seat_price": 40.00, "seats": 5, "education": False},
     {"company": "Quarry School", "seat_price": 35.00, "seats": 12, "education": True},
@@ -21,21 +22,13 @@ print("Cloudstep Software - Order Report")
 
 for order in orders:
     total = calculate_license_total(
-        order["seat_price"],
-        order["seats"],
-        order["education"]
+        order["seat_price"], order["seats"], order["education"]
     )
 
     review = needs_contract_review(total)
     trainer = gets_trainer(order["seats"], total)
 
-    print(format_license_line(
-        order["company"],
-        total,
-        review,
-        trainer
-    ))
-
+    print(format_license_line(order["company"], total, review, trainer))
 
     order_count = 0
 contract_count = 0
@@ -45,9 +38,7 @@ for order in orders:
     order_count += 1
 
     total = calculate_license_total(
-        order["seat_price"],
-        order["seats"],
-        order["education"]
+        order["seat_price"], order["seats"], order["education"]
     )
 
     if needs_contract_review(total):

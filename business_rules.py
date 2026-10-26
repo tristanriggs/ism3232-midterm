@@ -24,7 +24,9 @@ def get_seat_discount(seats: int, education: bool = False) -> float:
     return STANDARD_DISCOUNT
 
 
-def calculate_license_total(seat_price: float, seats: int, education: bool = False) -> float:
+def calculate_license_total(
+    seat_price: float, seats: int, education: bool = False
+) -> float:
     """Return the discounted license total including any onboarding fee."""
     cost = calculate_license_cost(seat_price, seats)
     discount = get_seat_discount(seats, education)
@@ -52,9 +54,7 @@ def total_licensed(orders: list) -> float:
 
     for order in orders:
         license_total = calculate_license_total(
-            order["seat_price"],
-            order["seats"],
-            order["education"]
+            order["seat_price"], order["seats"], order["education"]
         )
         total += license_total
 
@@ -68,9 +68,7 @@ def largest_license(orders: list) -> str:
 
     for order in orders:
         total = calculate_license_total(
-            order["seat_price"],
-            order["seats"],
-            order["education"]
+            order["seat_price"], order["seats"], order["education"]
         )
 
         if total > largest_total:
@@ -81,10 +79,7 @@ def largest_license(orders: list) -> str:
 
 
 def format_license_line(
-    company: str,
-    total: float,
-    contract_review: bool,
-    trainer: bool
+    company: str, total: float, contract_review: bool, trainer: bool
 ) -> str:
     """Format one line of the license report."""
     review_text = "yes" if contract_review else "no"
